@@ -36,11 +36,16 @@ function List() {
                             <td>{user.email}</td>
                             <td style={{ whiteSpace: 'nowrap' }}>
                                 <Link to={`/edit/${user._id}`} className="btn btn-sm btn-primary mr-1">Edit</Link>
-                                <button onClick={() => deleteUser(user._id).then((res)=>{
-                                    if(res.data.success) {
-                                        setAllUsers(allUsers.filter(user1=>user1._id!==user._id));
+                                <button onClick={() => {                                    
+                                    if (window.confirm("Want to delete?")) {
+                                        deleteUser(user._id)
+                                            .then((res)=>{
+                                                if(res.data.success) {
+                                                    setAllUsers(allUsers.filter(user1=>user1._id!==user._id));
+                                                }
+                                            })
                                     }
-                                })} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
+                                }} className="btn btn-sm btn-danger btn-delete-user" disabled={user.isDeleting}>
                                     {user.isDeleting 
                                         ? <span className="spinner-border spinner-border-sm"></span>
                                         : <span>Delete</span>

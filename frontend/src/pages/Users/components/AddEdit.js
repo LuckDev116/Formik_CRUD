@@ -18,10 +18,25 @@ function AddEdit() {
                     .required('Required'),
                 email: Yup.string().email('Invalid email address').required('Required'),
             })}
-            onSubmit={async (values, { setSubmitting }) => {
-                if (!id) await createNewUser(values);
-                else await updateOneUser(id, values);
-                navigate('/');
+            onSubmit={(values, { setSubmitting }) => {
+                if (!id){
+                    createNewUser(values)
+                        .then(()=>{
+                            alert("User added");
+                            navigate('/');
+                        })
+                        .catch(err=>{
+                            alert("Email already exist");
+                        })
+                } 
+                else {
+                    updateOneUser(id, values)
+                        .then(()=>{
+                            alert("User updated");
+                            navigate('/');
+                        })
+                } 
+                
             }}
         >
             {({ setFieldValue }) => {
