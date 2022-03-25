@@ -19,4 +19,3 @@ Front-end:
 * Formik (feel free to replace with preferred lib)
 * Yup (for form validation)
 * react-router-dom library for routing
-* 
